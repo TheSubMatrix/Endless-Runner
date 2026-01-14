@@ -706,12 +706,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: EndlessRunner.Character::RunnerPlayerController
   Crouch:
+    m_swipeAngle: 270
+    m_swipeStrengthThreshold: 10
+    m_swipeAngleThreshold: 45
     SwipeAction: {fileID: 1688924021}
     TapAction: {fileID: 333650503}
     <Response>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
   Jump:
+    m_swipeAngle: 90
+    m_swipeStrengthThreshold: 10
+    m_swipeAngleThreshold: 45
     SwipeAction: {fileID: 1669690206}
     TapAction: {fileID: 523893173}
     <Response>k__BackingField:
