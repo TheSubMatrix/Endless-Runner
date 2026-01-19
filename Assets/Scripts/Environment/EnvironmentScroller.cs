@@ -7,63 +7,122 @@ using Object = UnityEngine.Object;
 public class EnvironmentScroller : MonoBehaviour
 {
     [SerializeField] float m_scrollSpeed = 1f;
+    [SerializeField] float m_edgePadding = 2f;
     [SerializeField] List<EnvironmentTilePool> m_tilePools;
-    float m_currentSpawnX;
-    
+    readonly LinkedList<ActiveTile> m_activeTiles = new();
+    float m_cameraRightBound;
+    float m_cameraLeftBound;
+
     void Start()
     {
-        if (Camera.main == null){return;}
-        float cameraLeftBound = Camera.main.ViewportToWorldPoint(new(0, 0.5f, Camera.main.nearClipPlane)).x;
-        float cameraRightBound = Camera.main.ViewportToWorldPoint(new(1, 0.5f, Camera.main.nearClipPlane)).x;
+        if (Camera.main == null)
+        {
+            return;
+        }
+
+        m_cameraLeftBound = Camera.main.ViewportToWorldPoint(new(0, 0.5f, Camera.main.nearClipPlane)).x;
+        m_cameraRightBound = Camera.main.ViewportToWorldPoint(new(1, 0.5f, Camera.main.nearClipPlane)).x;
         foreach (EnvironmentTilePool pool in m_tilePools)
         {
-            pool.Initialize(); 
+            pool.Initialize();
         }
-        m_currentSpawnX = cameraLeftBound;
-        while (m_currentSpawnX < cameraRightBound)
+
+        float spawnX = m_cameraLeftBound;
+        while (spawnX < m_cameraRightBound)
         {
             EnvironmentTilePool pool = m_tilePools[UnityEngine.Random.Range(0, m_tilePools.Count)];
-            GameObject x = pool.Get();
-            x.transform.position = new (m_currentSpawnX + pool.TileBounds.extents.x, 0, 0);
-            m_currentSpawnX += pool.TileBounds.size.x;
+            ActiveTile activeTile = pool.Get();
+            activeTile.Tile.transform.position = new(spawnX + pool.TileBounds.extents.x, transform.position.y, 0);
+            m_activeTiles.AddLast(activeTile);
+            spawnX += pool.TileBounds.size.x;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        float scrollAmount = m_scrollSpeed * Time.fixedDeltaTime;
+        foreach (ActiveTile activeTile in m_activeTiles)
+        {
+            activeTile.Rigidbody.MovePosition(activeTile.Rigidbody.position + Vector2.left * scrollAmount);
+        }
+
+        if (m_activeTiles.Count == 0)
+        {
+            return;
+        }
+
+        ActiveTile leftmost = m_activeTiles.First.Value;
+        float leftmostRightEdge = leftmost.Tile.transform.position.x + leftmost.Pool.TileBounds.extents.x;
+        if (leftmostRightEdge < m_cameraLeftBound)
+        {
+            leftmost.Pool.Release(leftmost);
+            m_activeTiles.RemoveFirst();
+        }
+
+        ActiveTile rightmost = m_activeTiles.Last.Value;
+        float rightmostRightEdge = rightmost.Tile.transform.position.x + rightmost.Pool.TileBounds.extents.x;
+
+        while (rightmostRightEdge < m_cameraRightBound + m_edgePadding)
+        {
+            EnvironmentTilePool pool = m_tilePools[UnityEngine.Random.Range(0, m_tilePools.Count)];
+            ActiveTile activeTile = pool.Get();
+            Vector3 newPos = new(rightmostRightEdge + pool.TileBounds.extents.x - scrollAmount, transform.position.y, 0);
+            activeTile.Tile.transform.position = newPos;
+            m_activeTiles.AddLast(activeTile);
+            rightmost = activeTile;
+            rightmostRightEdge = rightmost.Tile.transform.position.x + rightmost.Pool.TileBounds.extents.x;
         }
     }
 }
 
-[Serializable]
-public class EnvironmentTilePool : IObjectPool<GameObject>
+public class ActiveTile
 {
-    [SerializeField] EnvironmentTileSO m_tileScriptableObject;
-    public Bounds TileBounds => m_tileScriptableObject.GetBounds();
-    ObjectPool<GameObject> m_pool;
+    public ActiveTile(GameObject tile, EnvironmentTilePool pool)
+    {
+        Tile = tile;
+        Pool = pool;
+        Rigidbody = tile.GetComponent<Rigidbody2D>();
+    }
+    
+    public readonly GameObject Tile;
+    public readonly Rigidbody2D Rigidbody;
+    public readonly EnvironmentTilePool Pool;
+}
+
+[Serializable]
+public class EnvironmentTilePool : IObjectPool<ActiveTile>
+{
+    [SerializeField] EnvironmentDataAggregator m_tilePrefab;
+    public Bounds TileBounds => m_tilePrefab.PrefabBounds;
+    ObjectPool<ActiveTile> m_pool;
     
     public void Initialize()
     {
         m_pool = new(
             createFunc: () =>
             {
-                GameObject obj = Object.Instantiate(m_tileScriptableObject.TilePrefab);
-                return obj;
+                GameObject obj = Object.Instantiate(m_tilePrefab.gameObject);
+                return new(obj, this);
             },
-            actionOnGet: (obj) => obj.SetActive(true),
-            actionOnRelease: (obj) => obj.SetActive(false),
-            actionOnDestroy: Object.Destroy,
+            actionOnGet: activeTile => activeTile.Tile.SetActive(true),
+            actionOnRelease: activeTile => activeTile.Tile.SetActive(false),
+            actionOnDestroy: activeTile => Object.Destroy(activeTile.Tile),
             defaultCapacity: 10,
             maxSize: 100
         );
     }
     
-    public GameObject Get()
+    public ActiveTile Get()
     {
         return m_pool.Get();
     }
     
-    public PooledObject<GameObject> Get(out GameObject v)
+    public PooledObject<ActiveTile> Get(out ActiveTile v)
     {
         return m_pool.Get(out v);
     }
     
-    public void Release(GameObject element)
+    public void Release(ActiveTile element)
     {
         m_pool.Release(element);
     }
