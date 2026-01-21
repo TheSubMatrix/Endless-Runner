@@ -1,0 +1,16 @@
+{
+    "name": "EndlessRunner.Obstacles",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2d0e75277eaa25f43a48214b4fff3dbf"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

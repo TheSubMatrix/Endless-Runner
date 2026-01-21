@@ -133,63 +133,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: 9ed2d3dc-bc3a-4118-a128-b0402e9b282f
---- !u!1001 &366101953
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3366072852565614443, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.32098
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366072852565614443, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.11952
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366072852565614443, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366072852565614443, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366072852565614443, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366072852565614443, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366072852565614443, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366072852565614443, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366072852565614443, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3366072852565614443, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4761597778696062715, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
-      propertyPath: m_Name
-      value: Square
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,9 +397,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37363c67461590a4c98c634a84c46479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: EndlessRunner.Environment::EnvironmentScroller
-  m_scrollSpeed: 1
+  m_scrollSpeed: 3
+  m_edgePadding: 2
   m_tilePools:
-  - m_tileScriptableObject: {fileID: 11400000, guid: 0accb362bf6e5b1459fad2cac26b0530, type: 2}
+  - m_tilePrefab: {fileID: 5851928654902795294, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
+  - m_tilePrefab: {fileID: 2265904063569826317, guid: c1fe5a754aca1284ab8221f16b857df1, type: 3}
 --- !u!4 &705963971
 Transform:
   m_ObjectHideFlags: 0
@@ -495,10 +440,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1418833869}
-  - component: {fileID: 1418833868}
   - component: {fileID: 1418833866}
-  - component: {fileID: 1418833865}
+  - component: {fileID: 1418833871}
+  - component: {fileID: 1418833868}
   - component: {fileID: 1418833864}
+  - component: {fileID: 1418833870}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -543,33 +489,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!50 &1418833865
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418833863}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!114 &1418833866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,6 +501,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc04aaffe55fd694abfabcd644f6b593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: EndlessRunner.Character::RunnerCharacter
+  m_jumpHeight: 3
+  m_maxGroundAngle: 45
+  m_gravity: -20
 --- !u!212 &1418833868
 SpriteRenderer:
   serializedVersion: 2
@@ -650,12 +572,71 @@ Transform:
   m_GameObject: {fileID: 1418833863}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.31801, y: -0.33755, z: 0}
+  m_LocalPosition: {x: 0, y: -0.33755, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1418833870
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418833863}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 5
+--- !u!114 &1418833871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418833863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8545ed0dfe65241bbdbdd2509eeef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EndlessRunner.Health::Health
+  m_health:
+    m_value: 1
+    m_onValueChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  m_onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1418833863}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1622339975
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,4 +786,3 @@ SceneRoots:
   - {fileID: 1622339977}
   - {fileID: 1664857776}
   - {fileID: 705963971}
-  - {fileID: 366101953}

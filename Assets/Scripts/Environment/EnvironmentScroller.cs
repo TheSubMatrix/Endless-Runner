@@ -15,10 +15,7 @@ public class EnvironmentScroller : MonoBehaviour
 
     void Start()
     {
-        if (Camera.main == null)
-        {
-            return;
-        }
+        if (Camera.main == null)return;
 
         m_cameraLeftBound = Camera.main.ViewportToWorldPoint(new(0, 0.5f, Camera.main.nearClipPlane)).x;
         m_cameraRightBound = Camera.main.ViewportToWorldPoint(new(1, 0.5f, Camera.main.nearClipPlane)).x;
