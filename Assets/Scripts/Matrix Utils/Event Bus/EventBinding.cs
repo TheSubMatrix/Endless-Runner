@@ -8,7 +8,7 @@
         public Action OnEventNoArgs { get; set; }
     }
 
-    public partial class EventBinding<T> : IEventBinding<T> where T : IEvent
+    public class EventBinding<T> : IEventBinding<T> where T : IEvent
     {
         Action<T> m_onEvent = _ => { };
         Action m_onEventNoArgs = () => { };

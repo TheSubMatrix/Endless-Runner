@@ -5,13 +5,13 @@ namespace MatrixUtils.EventBus
 
     public static class EventBus<T> where T : IEvent
     {
-        static readonly HashSet<IEventBinding<T>> Bindings = new HashSet<IEventBinding<T>>();
-        public static void Register(IEventBinding<T> binding) => Bindings.Add(binding);
-        public static void Deregister(IEventBinding<T> binding) => Bindings.Remove(binding);
+        static readonly HashSet<IEventBinding<T>> s_bindings = new HashSet<IEventBinding<T>>();
+        public static void Register(IEventBinding<T> binding) => s_bindings.Add(binding);
+        public static void Deregister(IEventBinding<T> binding) => s_bindings.Remove(binding);
 
         public static void Raise(T @event)
         {
-            foreach (IEventBinding<T> binding in Bindings)
+            foreach (IEventBinding<T> binding in s_bindings)
             {
                 binding.OnEvent.Invoke(@event);
                 binding.OnEventNoArgs.Invoke();
@@ -21,7 +21,7 @@ namespace MatrixUtils.EventBus
         static void Clear()
         {
             Debug.Log($"Clearing all bindings for {typeof(T).Name}");
-            Bindings.Clear();
+            s_bindings.Clear();
         }
     }
 }

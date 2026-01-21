@@ -1,22 +1,26 @@
 using System;
 using System.Collections.Generic;
+using MatrixUtils.EventBus;
+using MatrixUtils.GenericDatatypes;
 using UnityEngine;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 
 public class EnvironmentScroller : MonoBehaviour
 {
+    
     [SerializeField] float m_scrollSpeed = 1f;
     [SerializeField] float m_edgePadding = 2f;
     [SerializeField] List<EnvironmentTilePool> m_tilePools;
+    [SerializeField] Observer<float> m_distanceTraveled;
     readonly LinkedList<ActiveTile> m_activeTiles = new();
     float m_cameraRightBound;
     float m_cameraLeftBound;
-
+    public void SetScrollSpeed(float speed) => m_scrollSpeed = speed;
     void Start()
     {
         if (Camera.main == null)return;
-
+        
         m_cameraLeftBound = Camera.main.ViewportToWorldPoint(new(0, 0.5f, Camera.main.nearClipPlane)).x;
         m_cameraRightBound = Camera.main.ViewportToWorldPoint(new(1, 0.5f, Camera.main.nearClipPlane)).x;
         foreach (EnvironmentTilePool pool in m_tilePools)
@@ -69,6 +73,7 @@ public class EnvironmentScroller : MonoBehaviour
             rightmost = activeTile;
             rightmostRightEdge = rightmost.Tile.transform.position.x + rightmost.Pool.TileBounds.extents.x;
         }
+        m_distanceTraveled.Value += scrollAmount;
     }
 }
 
