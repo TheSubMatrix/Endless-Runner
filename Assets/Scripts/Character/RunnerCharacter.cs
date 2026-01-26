@@ -21,8 +21,11 @@ public class RunnerCharacter : MonoBehaviour
     bool m_desiresJump;
     bool m_rolling;
     float m_minGroundDotProduct;
+    Vector2 m_originalColliderSize;
+    Vector2 m_originalColliderOffset;
     Rigidbody2D m_rigidBody;
     BoxCollider2D m_collider;
+    Coroutine m_rollRoutine;
     public Observer<Vector2> m_velocity = new(new());
     
     [Inject, UsedImplicitly]
@@ -43,6 +46,8 @@ public class RunnerCharacter : MonoBehaviour
         m_collider = GetComponent<BoxCollider2D>();
         m_rigidBody.bodyType = RigidbodyType2D.Dynamic;
         m_rigidBody.gravityScale = 0f;
+        m_originalColliderSize = m_collider.size;
+        m_originalColliderOffset = m_collider.offset;
         m_currentGravity = m_gravity;
         m_velocity.Value = Vector2.zero;
         OnValidate();
@@ -65,6 +70,7 @@ public class RunnerCharacter : MonoBehaviour
     void HandleJump()
     {
         if (!m_desiresJump) return;
+        if(m_rolling) CancelRoll();
         if (m_isGrounded)
         {
             float jumpSpeed = Mathf.Sqrt(-2f * m_gravity * m_jumpHeight);
@@ -84,11 +90,11 @@ public class RunnerCharacter : MonoBehaviour
         if (m_isGrounded)
         {
             m_onRoll.Invoke();
-            StartCoroutine(RollRoutine());
+            m_rollRoutine = StartCoroutine(RollRoutine());
         }
         else
         {
-            StartCoroutine(DropAndRollRoutine());
+            m_rollRoutine = StartCoroutine(DropAndRollRoutine());
         }
     }
 
@@ -144,14 +150,18 @@ public class RunnerCharacter : MonoBehaviour
     }
     IEnumerator RollRoutine()
     {
-        Vector2 originalSize = m_collider.size;
-        Vector2 originalOffset =  m_collider.offset;
         yield return new WaitUntil(() => m_rolling);
-        float heightDifference = originalSize.y - 1;
-        m_collider.size = new(originalSize.x, 1);
-        m_collider.offset = new(originalOffset.x, originalOffset.y - heightDifference / 2f);
+        float heightDifference = m_originalColliderSize.y - m_originalColliderSize.y / 2;
+        m_collider.size = new(m_originalColliderSize.x, m_originalColliderSize.y - heightDifference);
+        m_collider.offset = new(m_originalColliderOffset.x, m_originalColliderOffset.y - heightDifference / 2f);
         yield return new WaitUntil(() => !m_rolling);
-        m_collider.size = originalSize;
-        m_collider.offset = originalOffset;
+        CancelRoll();
+    }
+    void CancelRoll()
+    {
+        m_rolling = false;
+        StopCoroutine(m_rollRoutine);
+        m_collider.size = m_originalColliderSize;
+        m_collider.offset = m_originalColliderOffset;
     }
 }
