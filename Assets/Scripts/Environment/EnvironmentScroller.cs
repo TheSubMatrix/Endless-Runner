@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using MatrixUtils.EventBus;
 using MatrixUtils.GenericDatatypes;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -8,17 +7,17 @@ using Object = UnityEngine.Object;
 
 public class EnvironmentScroller : MonoBehaviour
 {
-    
-    [SerializeField] float m_scrollSpeed = 1f;
     [SerializeField] float m_edgePadding = 2f;
     [SerializeField] List<EnvironmentTilePool> m_tilePools;
     [SerializeField] Observer<float> m_distanceTraveled;
+    [SerializeField] Observer<float> m_scrollSpeed = new(0);
     readonly LinkedList<ActiveTile> m_activeTiles = new();
     float m_cameraRightBound;
     float m_cameraLeftBound;
-    public void SetScrollSpeed(float speed) => m_scrollSpeed = speed;
+    public void SetScrollSpeed(float speed) => m_scrollSpeed.Value = speed;
     void Start()
     {
+        m_scrollSpeed.Notify();
         if (Camera.main == null)return;
         
         m_cameraLeftBound = Camera.main.ViewportToWorldPoint(new(0, 0.5f, Camera.main.nearClipPlane)).x;

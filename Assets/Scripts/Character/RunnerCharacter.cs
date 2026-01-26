@@ -2,7 +2,9 @@ using System;
 using System.Linq;
 using JetBrains.Annotations;
 using MatrixUtils.DependencyInjection;
+using MatrixUtils.GenericDatatypes;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class RunnerCharacter : MonoBehaviour
@@ -10,18 +12,18 @@ public class RunnerCharacter : MonoBehaviour
     [SerializeField] float m_jumpHeight = 2f;
     [SerializeField] float m_maxGroundAngle = 45f;
     [SerializeField] float m_gravity = -20f;
-    
+    public UnityEvent m_onJump = new();
+    public Observer<bool> m_isGrounded = new(false);
     bool m_desiresJump;
-    bool m_isGrounded;
     float m_minGroundDotProduct;
     Rigidbody2D m_rigidBody;
-    Vector2 m_velocity;
+    public Observer<Vector2> m_velocity = new(new());
     
     [Inject, UsedImplicitly]
     void SetupInputs(IInputHandler handler)
     {
         handler.Jump.AddListener(Jump);
-        handler.Crouch.AddListener(Crouch);
+        handler.Roll.AddListener(Roll);
     }
 
     void OnValidate()
@@ -34,7 +36,7 @@ public class RunnerCharacter : MonoBehaviour
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_rigidBody.bodyType = RigidbodyType2D.Dynamic;
         m_rigidBody.gravityScale = 0f;
-        m_velocity = Vector2.zero;
+        m_velocity.Value = Vector2.zero;
         OnValidate();
     }
 
@@ -43,13 +45,13 @@ public class RunnerCharacter : MonoBehaviour
         HandleJump();
         ApplyGravity();
         m_rigidBody.linearVelocity = m_velocity;
-        m_isGrounded = false;
+        m_isGrounded.Value = false;
     }
 
     void ApplyGravity()
     {
         if (m_isGrounded) return;
-        m_velocity.y += m_gravity * Time.fixedDeltaTime;
+        m_velocity.Value += new Vector2(0,m_gravity * Time.fixedDeltaTime);
     }
 
     void HandleJump()
@@ -58,17 +60,23 @@ public class RunnerCharacter : MonoBehaviour
         if (m_isGrounded)
         {
             float jumpSpeed = Mathf.Sqrt(-2f * m_gravity * m_jumpHeight);
-            if (m_velocity.y > 0)
+            if (m_velocity.Value.y > 0)
             {
-                jumpSpeed = Mathf.Max(jumpSpeed - m_velocity.y, 0f);
+                jumpSpeed = Mathf.Max(jumpSpeed - m_velocity.Value.y, 0f);
             }
-            m_velocity.y += jumpSpeed;
+            m_velocity.Value += new Vector2(0,jumpSpeed);
+            m_onJump.Invoke();
         }
         m_desiresJump = false;
     }
 
-    void Crouch()
+    void Roll()
     {
+        if (!m_isGrounded)
+        {
+            
+        }
+        
         
     }
 
@@ -77,11 +85,7 @@ public class RunnerCharacter : MonoBehaviour
         if (m_desiresJump) return;
         m_desiresJump = true;
     }
-
-    public void Swing()
-    {
-        
-    }
+    
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -95,16 +99,16 @@ public class RunnerCharacter : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        m_isGrounded = false;
+        m_isGrounded.Value = false;
     }
 
     void EvaluateCollision(Collision2D collision)
     {
         if (!collision.contacts.Any(contact => contact.normal.y >= m_minGroundDotProduct)) return;
-        m_isGrounded = true;
-        if (m_velocity.y < 0)
+        m_isGrounded.Value = true;
+        if (m_velocity.Value.y < 0)
         {
-            m_velocity.y = 0;
+            m_velocity.Value = new(m_velocity.Value.x, 0);
         }
     }
 }

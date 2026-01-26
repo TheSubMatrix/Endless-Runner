@@ -399,7 +399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37363c67461590a4c98c634a84c46479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: EndlessRunner.Environment::EnvironmentScroller
-  m_scrollSpeed: 3
   m_edgePadding: 2
   m_tilePools:
   - m_tilePrefab: {fileID: 5851928654902795294, guid: baf9641ae36b6f64a910b2e8c28e993a, type: 3}
@@ -412,6 +411,35 @@ MonoBehaviour:
         - m_Target: {fileID: 705963972}
           m_TargetAssemblyTypeName: DistanceScoreProxy, EndlessRunner.ScoreManagement
           m_MethodName: UpdateDistance
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  m_scrollSpeed:
+    m_value: 3
+    m_onValueChanged:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1418833878}
+          m_TargetAssemblyTypeName: CharacterAnimationController, EndlessRunner.Character
+          m_MethodName: UpdateMovementState
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1418833878}
+          m_TargetAssemblyTypeName: CharacterAnimationController, EndlessRunner.Character
+          m_MethodName: UpdateMovementSpeed
           m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -512,56 +540,21 @@ GameObject:
   - component: {fileID: 1418833869}
   - component: {fileID: 1418833866}
   - component: {fileID: 1418833871}
+  - component: {fileID: 1418833878}
   - component: {fileID: 1418833872}
   - component: {fileID: 1418833875}
   - component: {fileID: 1418833874}
   - component: {fileID: 1418833868}
-  - component: {fileID: 1418833864}
   - component: {fileID: 1418833870}
+  - component: {fileID: 1418833876}
+  - component: {fileID: 1418833877}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!70 &1418833864
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418833863}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: a3de495da70251d45992167a22090e79, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
 --- !u!114 &1418833866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,9 +567,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc04aaffe55fd694abfabcd644f6b593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: EndlessRunner.Character::RunnerCharacter
-  m_jumpHeight: 3
+  m_jumpHeight: 2
   m_maxGroundAngle: 45
   m_gravity: -20
+  m_onJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1418833877}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Jump
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_isGrounded:
+    m_value: 0
+    m_onValueChanged:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1418833878}
+          m_TargetAssemblyTypeName: CharacterAnimationController, EndlessRunner.Character
+          m_MethodName: ChangeGroundedState
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  m_velocity:
+    m_value: {x: 0, y: 0}
+    m_onValueChanged:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1418833878}
+          m_TargetAssemblyTypeName: CharacterAnimationController, EndlessRunner.Character
+          m_MethodName: UpdateVelocityY
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!212 &1418833868
 SpriteRenderer:
   serializedVersion: 2
@@ -626,7 +668,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -698,16 +740,16 @@ MonoBehaviour:
   m_onDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: EnvironmentMessenger, EndlessRunner.Environment
-        m_MethodName: ChangeSpeed
-        m_Mode: 4
+      - m_Target: {fileID: 1418833877}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Play Again
+          m_StringArgument: Death
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1418833875}
@@ -782,6 +824,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4470b281eca557242885c527a4a1c621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: EndlessRunner.GameManagement::GameOverNotifier
+--- !u!61 &1418833876
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418833863}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.052594483, y: 0.66113436}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 3.125, y: 1.71875}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.8984393, y: 1.3222687}
+  m_EdgeRadius: 0
+--- !u!95 &1418833877
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418833863}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c2a5b7097b0fe44394328c0bdb9252e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1418833878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418833863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed64e426e4ad5547b094971ab3736b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EndlessRunner.Character::CharacterAnimationController
 --- !u!1 &1599167918
 GameObject:
   m_ObjectHideFlags: 0

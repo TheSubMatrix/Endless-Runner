@@ -11,7 +11,7 @@ public class RunnerPlayerController : MonoBehaviour, IInputHandler, IDependencyP
     [SerializeField] TapResponse Swing;
 
     UnityEvent IInputHandler.Jump => Jump.Response;
-    UnityEvent IInputHandler.Crouch => Crouch.Response;
+    UnityEvent IInputHandler.Roll => Crouch.Response;
     UnityEvent IInputHandler.Swing => Swing.Response;
 
     void Awake()
