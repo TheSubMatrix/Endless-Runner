@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using JetBrains.Annotations;
 using MatrixUtils.DependencyInjection;
@@ -6,17 +7,22 @@ using MatrixUtils.GenericDatatypes;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class RunnerCharacter : MonoBehaviour
 {
     [SerializeField] float m_jumpHeight = 2f;
     [SerializeField] float m_maxGroundAngle = 45f;
     [SerializeField] float m_gravity = -20f;
+    [SerializeField] float m_fastFallGravityMultiplier = 2f;
+    float m_currentGravity;
     public UnityEvent m_onJump = new();
+    public UnityEvent m_onRoll = new();
     public Observer<bool> m_isGrounded = new(false);
     bool m_desiresJump;
+    bool m_rolling;
     float m_minGroundDotProduct;
     Rigidbody2D m_rigidBody;
+    BoxCollider2D m_collider;
     public Observer<Vector2> m_velocity = new(new());
     
     [Inject, UsedImplicitly]
@@ -34,8 +40,10 @@ public class RunnerCharacter : MonoBehaviour
     void Awake()
     {
         m_rigidBody = GetComponent<Rigidbody2D>();
+        m_collider = GetComponent<BoxCollider2D>();
         m_rigidBody.bodyType = RigidbodyType2D.Dynamic;
         m_rigidBody.gravityScale = 0f;
+        m_currentGravity = m_gravity;
         m_velocity.Value = Vector2.zero;
         OnValidate();
     }
@@ -51,7 +59,7 @@ public class RunnerCharacter : MonoBehaviour
     void ApplyGravity()
     {
         if (m_isGrounded) return;
-        m_velocity.Value += new Vector2(0,m_gravity * Time.fixedDeltaTime);
+        m_velocity.Value += new Vector2(0,m_currentGravity * Time.fixedDeltaTime);
     }
 
     void HandleJump()
@@ -72,12 +80,16 @@ public class RunnerCharacter : MonoBehaviour
 
     void Roll()
     {
-        if (!m_isGrounded)
+        if(m_rolling) return;
+        if (m_isGrounded)
         {
-            
+            m_onRoll.Invoke();
+            StartCoroutine(RollRoutine());
         }
-        
-        
+        else
+        {
+            StartCoroutine(DropAndRollRoutine());
+        }
     }
 
     void Jump()
@@ -110,5 +122,36 @@ public class RunnerCharacter : MonoBehaviour
         {
             m_velocity.Value = new(m_velocity.Value.x, 0);
         }
+    }
+
+    public void RollComplete()
+    {
+        m_rolling = false;
+    }
+
+    public void RollStarted()
+    {
+        m_rolling = true;
+    }
+
+    IEnumerator DropAndRollRoutine()
+    {
+        m_currentGravity = m_gravity * m_fastFallGravityMultiplier;
+        yield return new WaitUntil(() => m_isGrounded.Value);
+        m_onRoll.Invoke();
+        m_currentGravity = m_gravity;
+        yield return RollRoutine();
+    }
+    IEnumerator RollRoutine()
+    {
+        Vector2 originalSize = m_collider.size;
+        Vector2 originalOffset =  m_collider.offset;
+        yield return new WaitUntil(() => m_rolling);
+        float heightDifference = originalSize.y - 1;
+        m_collider.size = new(originalSize.x, 1);
+        m_collider.offset = new(originalOffset.x, originalOffset.y - heightDifference / 2f);
+        yield return new WaitUntil(() => !m_rolling);
+        m_collider.size = originalSize;
+        m_collider.offset = originalOffset;
     }
 }
