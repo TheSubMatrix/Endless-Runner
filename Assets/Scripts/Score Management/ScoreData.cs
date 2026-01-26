@@ -1,4 +1,8 @@
-public class ScoreData
+using System;
+using UnityEngine;
+
+[Serializable]
+public struct ScoreData
 {
     public float Distance;
     public float ExtraPoints;
@@ -8,5 +12,22 @@ public class ScoreData
         Distance = distance;
         ExtraPoints = extraPoints;
     }
-    public float Total => Distance + ExtraPoints;
+    public int Total => Mathf.RoundToInt(Distance + ExtraPoints);
+}
+[Serializable]
+public class SavedScoreInformation
+{
+    public ScoreData HighScore;
+    public ScoreData LatestScore;
+
+    public SavedScoreInformation(ScoreData highScore, ScoreData latestScore)
+    {
+        HighScore = highScore;
+        LatestScore = latestScore;
+    }
+    public SavedScoreInformation()
+    {
+        HighScore = new();
+        LatestScore = new();
+    }
 }

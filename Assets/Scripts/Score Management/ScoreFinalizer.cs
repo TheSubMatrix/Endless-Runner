@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class ScoreFinalizer : MonoBehaviour
 {
-    [Inject] IHighScoreWriter m_highScoreWriter;
+    [Inject] IScoreWriter m_scoreWriter;
     public void FinalizeScore()
     {
-        m_highScoreWriter.CommitScore();
+        m_scoreWriter.CommitScore();
     }
 }

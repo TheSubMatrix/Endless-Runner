@@ -1,5 +1,5 @@
 public interface IScoreRepository
 {
-    ScoreData Load();
-    void Save(ScoreData score);
+    SavedScoreInformation Load();
+    void Save(SavedScoreInformation score);
 }

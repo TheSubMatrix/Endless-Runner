@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DistanceScoreProxy : MonoBehaviour
 {
-    [Inject] IHighScoreWriter m_highScoreWriter;
+    [Inject] IScoreWriter m_scoreWriter;
     float m_distance;
     public void UpdateDistance(float distance)
     {
@@ -11,7 +11,7 @@ public class DistanceScoreProxy : MonoBehaviour
     }
     public void GameEnded()
     {
-        m_highScoreWriter.UpdateDistance(m_distance);
+        m_scoreWriter.UpdateDistance(m_distance);
         m_distance = 0f;
     }
 }
