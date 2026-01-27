@@ -8,7 +8,6 @@ public class GameOverScore : MonoBehaviour
 {
     [SerializeField, RequiredField] TMP_Text m_scoreText;
     [SerializeField, RequiredField] TMP_Text m_highScoreText;
-
     [Inject, UsedImplicitly] IScoreReader m_scoreReader;
 
     void Start()
