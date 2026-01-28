@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using MatrixUtils.Attributes;
-using UnityEditor;
 using UnityEngine;
 
 public class EnvironmentDataAggregator : MonoBehaviour
 {
-    [field: SerializeField, ReadOnly] public Bounds PrefabBounds { get; private set; }
-    [ReadOnly] public Rigidbody2D Rigidbody2D;
-    [ContextMenu("Recalculate Bounds", true)]
+    [field: SerializeField] public Bounds PrefabBounds { get; private set; }
+     public Rigidbody2D Rigidbody2D;
+    [ContextMenu("Recalculate Bounds")]
     void Reset()
     {
         Bounds localBounds = new(Vector3.zero, Vector3.zero);
