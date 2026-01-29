@@ -2,7 +2,8 @@
     "name": "EndlessRunner.Input",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:f6a0da6c76f2acf47af6e835216b3f47"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
