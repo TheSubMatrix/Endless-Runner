@@ -8,6 +8,7 @@ using Object = UnityEngine.Object;
 public class EnvironmentScroller : MonoBehaviour
 {
     [SerializeField] float m_edgePadding = 2f;
+    [SerializeField] EnvironmentTilePool m_spawnTilePool;
     [SerializeField] List<EnvironmentTilePool> m_tilePools;
     [SerializeField] Observer<float> m_distanceTraveled;
     [SerializeField] Observer<float> m_scrollSpeed = new(0);
@@ -22,12 +23,16 @@ public class EnvironmentScroller : MonoBehaviour
         
         m_cameraLeftBound = Camera.main.ViewportToWorldPoint(new(0, 0.5f, Camera.main.nearClipPlane)).x;
         m_cameraRightBound = Camera.main.ViewportToWorldPoint(new(1, 0.5f, Camera.main.nearClipPlane)).x;
+        m_spawnTilePool.Initialize();
         foreach (EnvironmentTilePool pool in m_tilePools)
         {
             pool.Initialize();
         }
-
+        ActiveTile spawnTile = m_spawnTilePool.Get();
         float spawnX = m_cameraLeftBound;
+        spawnTile.Tile.transform.position = new(spawnX + m_spawnTilePool.TileBounds.extents.x, transform.position.y, 0);
+        m_activeTiles.AddLast(spawnTile);
+        spawnX += spawnTile.Pool.TileBounds.size.x;
         while (spawnX < m_cameraRightBound)
         {
             EnvironmentTilePool pool = m_tilePools[UnityEngine.Random.Range(0, m_tilePools.Count)];
