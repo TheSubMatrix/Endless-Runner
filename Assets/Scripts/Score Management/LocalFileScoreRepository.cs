@@ -34,7 +34,6 @@ public class LocalFileScoreRepository : IScoreRepository
         {
             Directory.CreateDirectory(directory);
         }
-        Debug.Log($"Saving {score} to {directory}");
         File.WriteAllText(FilePath, json);
     }
 }

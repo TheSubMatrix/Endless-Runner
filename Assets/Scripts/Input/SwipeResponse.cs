@@ -2,8 +2,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+
 [Serializable]
-public class SwipeResponse
+public class SwipeResponse: IInputResponse
 {
     [SerializeField] float m_swipeAngle;
     [SerializeField] float m_swipeStrengthThreshold = 5f;
@@ -43,7 +44,7 @@ public class SwipeResponse
     }
     void ConfirmAction(InputAction.CallbackContext context)
     {
-        if (m_inputValue.magnitude > m_swipeStrengthThreshold && Vector2.Dot(m_inputValue.normalized, m_validSwipeDirection.normalized) > m_swipeValidDot && !m_registeredTap)
+        if (m_inputValue.magnitude > m_swipeStrengthThreshold && Vector2.Dot(m_inputValue.normalized, m_validSwipeDirection.normalized) > m_swipeValidDot && !m_registeredTap && Enabled)
         {
             Response.Invoke();
         }
@@ -59,4 +60,7 @@ public class SwipeResponse
     {
         m_registeredTap = false;
     }
+
+    public bool Enabled { get; set; } = true;
+    public UnityEvent OnResponse => Response;
 }

@@ -52,7 +52,6 @@ public class ScoreManager : MonoBehaviour, IScoreReaderWriter, IDependencyProvid
             m_currentHighScore.Notify();
         }
         m_latestScore.Value = m_currentScore;
-        Debug.Log(m_latestScore.Value.Total);
         m_latestScore.Notify();
         SavedScoreInformation scoreInformation = new(m_currentHighScore.Value, m_latestScore.Value);
         m_repository.Save(scoreInformation);

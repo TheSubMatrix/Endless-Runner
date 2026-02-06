@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class RunnerPlayerController : MonoBehaviour, IInputHandler, IDependencyProvider
 {
+    
     [Provide, UsedImplicitly] IInputHandler GetInputHandler() => this;
     [SerializeField] SwipeResponse Crouch;
     [SerializeField] SwipeResponse Jump;
@@ -19,5 +20,12 @@ public class RunnerPlayerController : MonoBehaviour, IInputHandler, IDependencyP
         Crouch.Initialize();
         Jump.Initialize();
         Swing.Initialize();
+    }
+
+    public void ChangeInputEnabledState(bool isEnabled)
+    {
+        Crouch.Enabled = isEnabled;
+        Jump.Enabled = isEnabled;
+        Swing.Enabled = isEnabled;
     }
 }

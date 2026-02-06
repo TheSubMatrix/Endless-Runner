@@ -157,10 +157,10 @@ public class RunnerCharacter : MonoBehaviour
         yield return new WaitUntil(() => !m_rolling);
         CancelRoll();
     }
-    void CancelRoll()
+    public void CancelRoll()
     {
         m_rolling = false;
-        StopCoroutine(m_rollRoutine);
+        if(m_rollRoutine != null) StopCoroutine(m_rollRoutine);
         m_collider.size = m_originalColliderSize;
         m_collider.offset = m_originalColliderOffset;
     }

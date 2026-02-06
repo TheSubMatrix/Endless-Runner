@@ -119,21 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &26823419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: Player/Delta
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
---- !u!114 &211443210
+--- !u!114 &95202290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,9 +386,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: EndlessRunner.Environment::EnvironmentScroller
   m_edgePadding: 2
+  m_spawnTilePool:
+    m_tilePrefab: {fileID: 6902409000302755742, guid: 191da59c3c135534db34cfb183175314, type: 3}
   m_tilePools:
   - m_tilePrefab: {fileID: 6902409000302755742, guid: c9665585978661f4d8da349d882996e0, type: 3}
   - m_tilePrefab: {fileID: 6902409000302755742, guid: 3adb616c27a6a7e4d897502000426e0a, type: 3}
+  - m_tilePrefab: {fileID: 6902409000302755742, guid: dab5758a14e3d4742941ac2d0e5881b1, type: 3}
+  - m_tilePrefab: {fileID: 6902409000302755742, guid: 0fe7b25993bc5524abae0fcc18f4dc3a, type: 3}
   m_distanceTraveled:
     m_value: 0
     m_onValueChanged:
@@ -515,21 +505,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &874569762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: Player/Press
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_ActionId: 181b39a9-d918-448b-ad63-e5dd22f314ef
---- !u!114 &927353673
+--- !u!114 &831746543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -543,7 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
---- !u!114 &1009344561
+--- !u!114 &874569762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -553,7 +529,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: Player/Tap
+  m_Name: Player/Press
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: 181b39a9-d918-448b-ad63-e5dd22f314ef
@@ -2508,7 +2484,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1212054323
+--- !u!114 &1358996230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2749,6 +2725,30 @@ MonoBehaviour:
   m_onDeath:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1418833866}
+        m_TargetAssemblyTypeName: RunnerCharacter, EndlessRunner.Character
+        m_MethodName: CancelRoll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Play Again
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1622339976}
+        m_TargetAssemblyTypeName: RunnerPlayerController, EndlessRunner.Character
+        m_MethodName: ChangeInputEnabledState
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Play Again
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1418833877}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger
@@ -3068,21 +3068,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: EndlessRunner.Character::RunnerPlayerController
   Crouch:
     m_swipeAngle: 270
-    m_swipeStrengthThreshold: 10
+    m_swipeStrengthThreshold: 5
     m_swipeAngleThreshold: 45
-    DeltaAction: {fileID: 927353673}
-    HoldAction: {fileID: 211443210}
-    TapAction: {fileID: 2068156859}
+    DeltaAction: {fileID: 831746543}
+    HoldAction: {fileID: 1358996230}
+    TapAction: {fileID: 1822769690}
     <Response>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
   Jump:
     m_swipeAngle: 90
-    m_swipeStrengthThreshold: 10
+    m_swipeStrengthThreshold: 5
     m_swipeAngleThreshold: 45
-    DeltaAction: {fileID: 26823419}
-    HoldAction: {fileID: 1212054323}
-    TapAction: {fileID: 1009344561}
+    DeltaAction: {fileID: 1853970721}
+    HoldAction: {fileID: 95202290}
+    TapAction: {fileID: 1706759292}
     <Response>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
@@ -3090,19 +3090,7 @@ MonoBehaviour:
     m_tapAction: {fileID: 874569762}
     <Response>k__BackingField:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1418833877}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Attack1
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!4 &1622339977
 Transform:
   m_ObjectHideFlags: 0
@@ -3162,7 +3150,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2068156859
+--- !u!114 &1706759292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3176,6 +3164,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: 181b39a9-d918-448b-ad63-e5dd22f314ef
+--- !u!114 &1822769690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/Tap
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_ActionId: 181b39a9-d918-448b-ad63-e5dd22f314ef
+--- !u!114 &1853970721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/Delta
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
 --- !u!1001 &1469712686479419046
 PrefabInstance:
   m_ObjectHideFlags: 0
