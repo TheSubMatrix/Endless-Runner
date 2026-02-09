@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnvironmentDataAggregator : MonoBehaviour
 {
     [field: SerializeField] public Bounds PrefabBounds { get; private set; }
      public Rigidbody2D Rigidbody2D;
+     public UnityEvent OnResetForPool = new();
     [ContextMenu("Recalculate Bounds")]
     void Reset()
     {

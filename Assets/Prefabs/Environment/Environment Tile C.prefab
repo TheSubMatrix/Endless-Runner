@@ -94,6 +94,21 @@ MonoBehaviour:
     m_Center: {x: 0, y: -0.020448685, z: 0}
     m_Extent: {x: 9, y: 5.0204487, z: 0}
   Rigidbody2D: {fileID: 4684494294798407045}
+  OnResetForPool:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4145366390535406883}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2622872733335246428
 GameObject:
   m_ObjectHideFlags: 0
@@ -3106,5 +3121,10 @@ PrefabInstance:
 --- !u!4 &3311771029894951217 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2204569314362921152, guid: a1d2455ffd50eb84d9b8399d3ad10712, type: 3}
+  m_PrefabInstance: {fileID: 3705884326152724977}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4145366390535406883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 786651006098318546, guid: a1d2455ffd50eb84d9b8399d3ad10712, type: 3}
   m_PrefabInstance: {fileID: 3705884326152724977}
   m_PrefabAsset: {fileID: 0}

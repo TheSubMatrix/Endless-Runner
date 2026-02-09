@@ -85,14 +85,14 @@ public class EnvironmentScroller : MonoBehaviour
 
 public class ActiveTile
 {
-    public ActiveTile(GameObject tile, EnvironmentTilePool pool)
+    public ActiveTile(EnvironmentDataAggregator tile, EnvironmentTilePool pool)
     {
         Tile = tile;
         Pool = pool;
         Rigidbody = tile.GetComponent<Rigidbody2D>();
     }
     
-    public readonly GameObject Tile;
+    public readonly EnvironmentDataAggregator Tile;
     public readonly Rigidbody2D Rigidbody;
     public readonly EnvironmentTilePool Pool;
 }
@@ -109,15 +109,19 @@ public class EnvironmentTilePool : IObjectPool<ActiveTile>
         m_pool = new(
             createFunc: () =>
             {
-                GameObject obj = Object.Instantiate(m_tilePrefab.gameObject);
+                EnvironmentDataAggregator obj = Object.Instantiate(m_tilePrefab);
                 foreach (MonoBehaviour mb in obj.GetComponentsInChildren<MonoBehaviour>())
                 {
                     injector.Inject(mb);
                 }
                 return new(obj, this);
             },
-            actionOnGet: activeTile => activeTile.Tile.SetActive(true),
-            actionOnRelease: activeTile => activeTile.Tile.SetActive(false),
+            actionOnGet: activeTile => activeTile.Tile.gameObject.SetActive(true),
+            actionOnRelease: activeTile =>
+            {
+                activeTile.Tile.OnResetForPool.Invoke();
+                activeTile.Tile.gameObject.SetActive(false);
+            },
             actionOnDestroy: activeTile => Object.Destroy(activeTile.Tile),
             defaultCapacity: 10,
             maxSize: 100
