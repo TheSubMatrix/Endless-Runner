@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MatrixUtils.DependencyInjection;
 using MatrixUtils.GenericDatatypes;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -7,6 +8,7 @@ using Object = UnityEngine.Object;
 
 public class EnvironmentScroller : MonoBehaviour
 {
+    [Inject] IInjector m_injector;
     [SerializeField] float m_edgePadding = 2f;
     [SerializeField] EnvironmentTilePool m_spawnTilePool;
     [SerializeField] List<EnvironmentTilePool> m_tilePools;
@@ -23,10 +25,10 @@ public class EnvironmentScroller : MonoBehaviour
         
         m_cameraLeftBound = Camera.main.ViewportToWorldPoint(new(0, 0.5f, Camera.main.nearClipPlane)).x;
         m_cameraRightBound = Camera.main.ViewportToWorldPoint(new(1, 0.5f, Camera.main.nearClipPlane)).x;
-        m_spawnTilePool.Initialize();
+        m_spawnTilePool.Initialize(m_injector);
         foreach (EnvironmentTilePool pool in m_tilePools)
         {
-            pool.Initialize();
+            pool.Initialize(m_injector);
         }
         ActiveTile spawnTile = m_spawnTilePool.Get();
         float spawnX = m_cameraLeftBound;
@@ -102,12 +104,16 @@ public class EnvironmentTilePool : IObjectPool<ActiveTile>
     public Bounds TileBounds => m_tilePrefab.PrefabBounds;
     ObjectPool<ActiveTile> m_pool;
     
-    public void Initialize()
+    public void Initialize(IInjector injector)
     {
         m_pool = new(
             createFunc: () =>
             {
                 GameObject obj = Object.Instantiate(m_tilePrefab.gameObject);
+                foreach (MonoBehaviour mb in obj.GetComponentsInChildren<MonoBehaviour>())
+                {
+                    injector.Inject(mb);
+                }
                 return new(obj, this);
             },
             actionOnGet: activeTile => activeTile.Tile.SetActive(true),

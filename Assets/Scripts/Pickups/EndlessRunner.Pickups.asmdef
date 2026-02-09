@@ -1,0 +1,20 @@
+{
+    "name": "EndlessRunner.Pickups",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d54f9b50b09e66240b1d8048be113f2f",
+        "GUID:f6a0da6c76f2acf47af6e835216b3f47",
+        "GUID:6af97dccfc1dd8748a23e6e573e1435a",
+        "GUID:6a8494fafba836d488ffd81b0b7fe8c5",
+        "GUID:1e8b965862d0631489816768b0c8f383"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

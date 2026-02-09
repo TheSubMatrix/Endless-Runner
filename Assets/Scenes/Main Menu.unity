@@ -630,6 +630,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389947463}
   m_CullTransparentMesh: 1
+--- !u!1001 &556297915
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6876371619199862346, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_Name
+      value: Sound Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1953.1763
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 641.85736
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
 --- !u!1 &945092380
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,6 +839,7 @@ GameObject:
   - component: {fileID: 1058804485}
   - component: {fileID: 1058804484}
   - component: {fileID: 1058804483}
+  - component: {fileID: 1058804487}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -877,6 +935,18 @@ MonoBehaviour:
           m_StringArgument: Main Menu
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1058804487}
+        m_TargetAssemblyTypeName: SoundProxy, EndlessRunner.Sound
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1058804485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,6 +985,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058804481}
   m_CullTransparentMesh: 1
+--- !u!114 &1058804487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058804481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8a6653365ef714591d6d3a8301276b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EndlessRunner.Sound::SoundProxy
+  m_sounds:
+  - Clip: {fileID: 8300000, guid: bcba5572c743b6f469b131c80476f887, type: 3}
+    MixerGroup: {fileID: -3388642512163253851, guid: 37aaa816789b6264eb84083cbe909b11, type: 2}
+    Loop: 0
+    PlayOnAwake: 0
+    PlayedFrequently: 0
+    Volume: 1
+    Pitch: 1
+    PanStereo: 0
+    SpatialBlend: 0
+    ReverbZoneMix: 0
+    DopplerLevel: 0
+    Spread: 0
+    MinDistance: 0
+    MaxDistance: 500
+    IgnoreListenerVolume: 0
+    IgnoreListenerPause: 0
+    RolloffMode: 0
 --- !u!1 &1578031234
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,6 +1028,7 @@ GameObject:
   - component: {fileID: 1578031238}
   - component: {fileID: 1578031237}
   - component: {fileID: 1578031236}
+  - component: {fileID: 1578031240}
   m_Layer: 5
   m_Name: Play Button
   m_TagString: Untagged
@@ -1023,6 +1124,18 @@ MonoBehaviour:
           m_StringArgument: Game Scene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1578031240}
+        m_TargetAssemblyTypeName: SoundProxy, EndlessRunner.Sound
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1578031238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,6 +1174,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578031234}
   m_CullTransparentMesh: 1
+--- !u!114 &1578031240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578031234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8a6653365ef714591d6d3a8301276b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EndlessRunner.Sound::SoundProxy
+  m_sounds:
+  - Clip: {fileID: 8300000, guid: bcba5572c743b6f469b131c80476f887, type: 3}
+    MixerGroup: {fileID: -3388642512163253851, guid: 37aaa816789b6264eb84083cbe909b11, type: 2}
+    Loop: 0
+    PlayOnAwake: 0
+    PlayedFrequently: 0
+    Volume: 1
+    Pitch: 1
+    PanStereo: 0
+    SpatialBlend: 0
+    ReverbZoneMix: 0
+    DopplerLevel: 0
+    Spread: 0
+    MinDistance: 0
+    MaxDistance: 500
+    IgnoreListenerVolume: 0
+    IgnoreListenerPause: 0
+    RolloffMode: 0
 --- !u!1 &1737453324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,3 +1677,4 @@ SceneRoots:
   - {fileID: 1979237008}
   - {fileID: 75478629}
   - {fileID: 360541548}
+  - {fileID: 556297915}

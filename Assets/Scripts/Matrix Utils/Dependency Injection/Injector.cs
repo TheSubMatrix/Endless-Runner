@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+
 namespace MatrixUtils.DependencyInjection {
 
     [DefaultExecutionOrder(-1000)]
-    public class Injector : MonoBehaviour {
+    public class Injector : MonoBehaviour, IInjector, IDependencyProvider
+    {
+        [Provide] IInjector GetInjector() => this;
         const BindingFlags BindingFlags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic;
-
         readonly Dictionary<Type, object> m_registry = new();
 
         protected void Awake()
@@ -25,11 +27,11 @@ namespace MatrixUtils.DependencyInjection {
 	        // Inject into all injectables
 	        IEnumerable<MonoBehaviour> injectables = monoBehaviours.Where(IsInjectable);
 	        foreach (MonoBehaviour injectable in injectables) {
-		        Inject(injectable);
+		        InjectInternal(injectable);
 	        }
         }
 
-        void Inject(object instance)
+        void InjectInternal(object instance)
         {
             Type type = instance.GetType();
 
@@ -174,6 +176,15 @@ namespace MatrixUtils.DependencyInjection {
         static bool IsInjectable(MonoBehaviour obj) {
             MemberInfo[] members = obj.GetType().GetMembers(BindingFlags);
             return members.Any(member => Attribute.IsDefined(member, typeof(InjectAttribute)));
+        }
+
+        public void Inject(MonoBehaviour injectable)
+        {
+            if (!IsInjectable(injectable))
+            {
+                return;
+            }
+            InjectInternal(injectable);
         }
     }
 }

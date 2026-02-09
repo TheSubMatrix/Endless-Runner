@@ -133,6 +133,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: 9ed2d3dc-bc3a-4118-a128-b0402e9b282f
+--- !u!1001 &272980119
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6876371619199862346, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_Name
+      value: Sound Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943648969863973230, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fb6c8e09377b8234da5264de02dca01a, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,6 +423,7 @@ GameObject:
   - component: {fileID: 705963970}
   - component: {fileID: 705963972}
   - component: {fileID: 705963973}
+  - component: {fileID: 705963974}
   m_Layer: 0
   m_Name: Environment Scroller
   m_TagString: Untagged
@@ -401,6 +459,18 @@ MonoBehaviour:
         - m_Target: {fileID: 705963972}
           m_TargetAssemblyTypeName: DistanceScoreProxy, EndlessRunner.ScoreManagement
           m_MethodName: UpdateDistance
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 705963974}
+          m_TargetAssemblyTypeName: GameSpeedUpdater, EndlessRunner.Environment
+          m_MethodName: UpdateNormalGameSpeed
           m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -481,6 +551,18 @@ MonoBehaviour:
   m_onGameOver:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 705963974}
+        m_TargetAssemblyTypeName: GameSpeedUpdater, EndlessRunner.Environment
+        m_MethodName: UpdateNormalGameSpeed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 705963970}
         m_TargetAssemblyTypeName: EnvironmentScroller, EndlessRunner.Environment
         m_MethodName: SetScrollSpeed
@@ -496,6 +578,205 @@ MonoBehaviour:
       - m_Target: {fileID: 705963972}
         m_TargetAssemblyTypeName: DistanceScoreProxy, EndlessRunner.ScoreManagement
         m_MethodName: GameEnded
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &705963974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705963969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829421d281f4ae7489774b5e2d2f3bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EndlessRunner.Environment::GameSpeedUpdater
+  OnSpeedOverrideStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 780135201}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: set_pitch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSpeedOverrideEnded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 780135201}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: set_pitch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &780135200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780135202}
+  - component: {fileID: 780135201}
+  - component: {fileID: 780135203}
+  m_Layer: 0
+  m_Name: Background Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &780135201
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780135200}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1747767152679850445, guid: 37aaa816789b6264eb84083cbe909b11, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 1d89216e5c8008a47977609b58a1415d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &780135202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780135200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &780135203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780135200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e63e8da18ac7f4b86aca440b5e019c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EndlessRunner.GameManagement::GameOverNotificationResponder
+  m_onGameOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 780135201}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Stop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2513,6 +2794,7 @@ GameObject:
   - component: {fileID: 1418833872}
   - component: {fileID: 1418833875}
   - component: {fileID: 1418833874}
+  - component: {fileID: 1418833879}
   - component: {fileID: 1418833868}
   - component: {fileID: 1418833870}
   - component: {fileID: 1418833876}
@@ -2555,6 +2837,18 @@ MonoBehaviour:
           m_StringArgument: Jump
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1418833879}
+        m_TargetAssemblyTypeName: SoundProxy, EndlessRunner.Sound
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: Jump
+          m_BoolArgument: 0
+        m_CallState: 2
   m_onRoll:
     m_PersistentCalls:
       m_Calls:
@@ -2562,6 +2856,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Roll
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1418833879}
+        m_TargetAssemblyTypeName: SoundProxy, EndlessRunner.Sound
+        m_MethodName: PlaySound
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2761,6 +3067,18 @@ MonoBehaviour:
           m_StringArgument: Death
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1418833879}
+        m_TargetAssemblyTypeName: SoundProxy, EndlessRunner.Sound
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: Play Again
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1418833875}
         m_TargetAssemblyTypeName: GameOverNotifier, EndlessRunner.GameManagement
         m_MethodName: NotifyGameOver
@@ -2913,6 +3231,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed64e426e4ad5547b094971ab3736b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: EndlessRunner.Character::CharacterAnimationController
+--- !u!114 &1418833879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418833863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8a6653365ef714591d6d3a8301276b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EndlessRunner.Sound::SoundProxy
+  m_sounds:
+  - Clip: {fileID: 8300000, guid: 1da0b995b6e1d4e469feed8b4e72fcab, type: 3}
+    MixerGroup: {fileID: -3388642512163253851, guid: 37aaa816789b6264eb84083cbe909b11, type: 2}
+    Loop: 0
+    PlayOnAwake: 0
+    PlayedFrequently: 0
+    Volume: 1
+    Pitch: 1
+    PanStereo: 0
+    SpatialBlend: 0
+    ReverbZoneMix: 0
+    DopplerLevel: 0
+    Spread: 0
+    MinDistance: 0
+    MaxDistance: 500
+    IgnoreListenerVolume: 0
+    IgnoreListenerPause: 0
+    RolloffMode: 0
+  - Clip: {fileID: 8300000, guid: 32e52e3c1fb11c24a8e61ec725661658, type: 3}
+    MixerGroup: {fileID: -3388642512163253851, guid: 37aaa816789b6264eb84083cbe909b11, type: 2}
+    Loop: 0
+    PlayOnAwake: 0
+    PlayedFrequently: 0
+    Volume: 1
+    Pitch: 1
+    PanStereo: 0
+    SpatialBlend: 0
+    ReverbZoneMix: 0
+    DopplerLevel: 0
+    Spread: 0
+    MinDistance: 0
+    MaxDistance: 500
+    IgnoreListenerVolume: 0
+    IgnoreListenerPause: 0
+    RolloffMode: 0
+  - Clip: {fileID: 8300000, guid: 3bb0a4cd1755e7a419b10b6a954e7071, type: 3}
+    MixerGroup: {fileID: -3388642512163253851, guid: 37aaa816789b6264eb84083cbe909b11, type: 2}
+    Loop: 0
+    PlayOnAwake: 0
+    PlayedFrequently: 0
+    Volume: 1
+    Pitch: 1
+    PanStereo: 0
+    SpatialBlend: 0
+    ReverbZoneMix: 0
+    DopplerLevel: 0
+    Spread: 0
+    MinDistance: 0
+    MaxDistance: 500
+    IgnoreListenerVolume: 0
+    IgnoreListenerPause: 0
+    RolloffMode: 0
 --- !u!1 &1427491185
 GameObject:
   m_ObjectHideFlags: 0
@@ -3418,3 +3800,5 @@ SceneRoots:
   - {fileID: 1599167921}
   - {fileID: 5509908524986547974}
   - {fileID: 1427491187}
+  - {fileID: 780135202}
+  - {fileID: 272980119}
