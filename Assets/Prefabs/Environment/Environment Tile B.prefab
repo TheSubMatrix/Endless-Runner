@@ -36,6 +36,7 @@ Transform:
   - {fileID: 8369304501710151132}
   - {fileID: 383302920263683999}
   - {fileID: 1877758268550808713}
+  - {fileID: 3447366307179687178}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &4877319169684574250
@@ -93,6 +94,24 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0.18999958, z: 0}
     m_Extent: {x: 9, y: 5.25, z: 0}
   Rigidbody2D: {fileID: 4684494294798407045}
+  OnCleanup:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6675304489949853148}
+        m_TargetAssemblyTypeName: CoinPickup, EndlessRunner.Pickups
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnInitialize:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2622872733335246428
 GameObject:
   m_ObjectHideFlags: 0
@@ -3070,3 +3089,76 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1001 &8933663915035722282
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5738861022952563186}
+    m_Modifications:
+    - target: {fileID: 3855570788845898012, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_Name
+      value: Coin High Points
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+--- !u!4 &3447366307179687178 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6065573111539330848, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+  m_PrefabInstance: {fileID: 8933663915035722282}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6675304489949853148 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2835523868891412470, guid: b5fc0e7eb3f67564899e16101d6cfaac, type: 3}
+  m_PrefabInstance: {fileID: 8933663915035722282}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f630aadc80fd01a4b9a742e7a14168f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EndlessRunner.Pickups::CoinPickup

@@ -119,7 +119,7 @@ public class EnvironmentTilePool : IObjectPool<ActiveTile>
             actionOnGet: activeTile => activeTile.Tile.gameObject.SetActive(true),
             actionOnRelease: activeTile =>
             {
-                activeTile.Tile.OnResetForPool.Invoke();
+                activeTile.Tile.OnCleanup.Invoke();
                 activeTile.Tile.gameObject.SetActive(false);
             },
             actionOnDestroy: activeTile => Object.Destroy(activeTile.Tile),
